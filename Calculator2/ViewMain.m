@@ -21,6 +21,7 @@
 @synthesize formArray;
 @synthesize history;
 
+/* 初期表示 */
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -38,49 +39,62 @@
     self.title = @"計算機";
 }
 
+/* 1ボタンタップ */
 - (IBAction)touch_1:(id)sender {
     _formula.text = [_formula.text stringByAppendingString: @"1"];
 }
 
+/* 2ボタンタップ */
 - (IBAction)touch_2:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"2"];
 }
 
+/* 3ボタンタップ */
 - (IBAction)touch_3:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"3"];
 }
 
+/* 4ボタンタップ */
 - (IBAction)touch_4:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"4"];
 }
 
+/* 5ボタンタップ */
 - (IBAction)touch_5:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"5"];
 }
 
+/* 6ボタンタップ */
 - (IBAction)touch_6:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"6"];
 }
 
+/* 7ボタンタップ */
 - (IBAction)touch_7:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"7"];
 }
 
+/* 8ボタンタップ */
 - (IBAction)touch_8:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"8"];
 }
 
+/* 9ボタンタップ */
 - (IBAction)touch_9:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"9"];
 }
 
+/* 0ボタンタップ */
 - (IBAction)touch_0:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"0"];
 }
+
+/* .ボタンタップ */
 - (IBAction)touch_period:(id)sender {
     _formula.text = [_formula.text stringByAppendingString: @"."];
 }
 
+/* +ボタンタップ */
 - (IBAction)touch_plus:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"+"];
     
@@ -88,39 +102,47 @@
     
 }
 
+/* -ボタンタップ */
 - (IBAction)touch_minus:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"-"];
     
     self.flug = 2;
 }
 
+/* *ボタンタップ */
 - (IBAction)touch_asterisk:(id)sender {
     _formula.text = [_formula.text stringByAppendingString:@"*"];
     
     self.flug = 3;
 }
 
+/* /ボタンタップ */
 - (IBAction)touch_srash:(id)sender {
     _formula.text = [_formula.text stringByAppendingString: @"/"];
     
     self.flug = 4;
 }
 
+/* √ボタンタップ */
 - (IBAction)touch_root:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"√"];
 }
 
+/* Cボタンタップ */
 - (IBAction)touch_clear:(id)sender {
     _formula.text = @"";
     _answer.text = @"";
 }
 
+/* =ボタンタップ */
 - (IBAction)touch_equal:(id)sender {
     NSString *form = _formula.text;
 
 //    NSLog(@"%ld", formArray.count);
+//  formArrayにformの値を追加
     [formArray addObject:form];
-//    再読み込み
+    
+//  TableView再読み込み
     [history reloadData];
 //    NSLog(@"%ld", formArray.count);
     
@@ -128,6 +150,7 @@
     
     NSInteger n2 = [[form substringFromIndex:2] intValue];
     
+//  四則計算分岐のswitch文
     switch (flug) {
         case 1:
             ans = n1 + n2;
@@ -151,7 +174,6 @@
             
         default:
             break;
-            
     }
     
     self.formula.text = @"";
@@ -167,19 +189,20 @@
 //    _history.dataSource = 
 }
 
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)history
+/* TableViewのセクション数を返すメソッド */
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-//-(NSInteger)history:(UITableView *)history numberOfRowsInSection:(NSInteger)section
+/* TableVIewの行数を返すメソッド */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return formArray.count;
     //    return [formArray count];
 }
 
+/* TableViewのセルの値を設定するメソッド */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //    static NSString *CellIdentifier = @"Cell";
 
@@ -195,7 +218,6 @@
 //        NSLog(@"false");
 //    }
     
-    
     cell.textLabel.text = [formArray objectAtIndex:indexPath.row];
     
 //    UITableViewCell *cell = [history dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -207,6 +229,7 @@
     return cell;
 }
 
+/* TableViewのセルタップ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -227,8 +250,6 @@
         
     }
 
-
-
 /*
  #pragma mark - Navigation
  
@@ -238,4 +259,5 @@
  // Pass the selected object to the new view controller.
  }
  */
+
 @end
