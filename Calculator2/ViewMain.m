@@ -24,18 +24,10 @@
 /* 初期表示 */
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     _formula.text = @"";
     _answer.text = @"";
-//    history = [[UITableView alloc] initWithFrame:self.view.bounds];
-//    _history.delegate = self;
-//    _history.dataSource = self;
-//    [self.view addSubview:history];
-
-//    formArray = [NSMutableArray arrayWithObject:@"?"];
+    flug = 0;
     formArray = [NSMutableArray array];
-    
-//    _formArray = [[NSMutableArray alloc] init];
     self.title = @"計算機";
 }
 
@@ -97,35 +89,26 @@
 /* +ボタンタップ */
 - (IBAction)touch_plus:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"+"];
-    
-    self.flug = 1;
-    
 }
 
 /* -ボタンタップ */
 - (IBAction)touch_minus:(id)sender {
         _formula.text = [_formula.text stringByAppendingString: @"-"];
-    
-    self.flug = 2;
 }
 
 /* *ボタンタップ */
 - (IBAction)touch_asterisk:(id)sender {
     _formula.text = [_formula.text stringByAppendingString:@"*"];
-    
-    self.flug = 3;
 }
 
 /* /ボタンタップ */
 - (IBAction)touch_srash:(id)sender {
     _formula.text = [_formula.text stringByAppendingString: @"/"];
-    
-    self.flug = 4;
 }
 
 /* √ボタンタップ */
 - (IBAction)touch_root:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"√"];
+    _formula.text = [_formula.text stringByAppendingString: @"√"];
 }
 
 /* Cボタンタップ */
@@ -138,55 +121,82 @@
 - (IBAction)touch_equal:(id)sender {
     NSString *form = _formula.text;
 
-//    NSLog(@"%ld", formArray.count);
-//  formArrayにformの値を追加
-    [formArray addObject:form];
-    
-//  TableView再読み込み
-    [history reloadData];
-//    NSLog(@"%ld", formArray.count);
-    
-    NSInteger n1 = [[form substringToIndex:1] intValue];
-    
-    NSInteger n2 = [[form substringFromIndex:2] intValue];
-    
-//  四則計算分岐のswitch文
-    switch (flug) {
-        case 1:
-            ans = n1 + n2;
-            self.answer.text = [NSString stringWithFormat:@"%ld" ,ans];
-            break;
+//  TextFieldに計算式を入力していない場合／⚪︎+⚪︎形式でない場合はメッセージを表示する
+    if([form isEqualToString:@""]){
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"警告"
+                                                                                 message:@"計算式を入力してください。"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action){return;}]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }else{
+//      TextFieldに入力された計算式が正しいか入力チェックを行う
+        NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        NSCharacterSet *numtarget1 = [NSCharacterSet characterSetWithCharactersInString:[form substringToIndex:1]];
+        NSCharacterSet *numtarget2 = [NSCharacterSet characterSetWithCharactersInString:[form substringFromIndex:2]];
+        NSCharacterSet *sign = [NSCharacterSet characterSetWithCharactersInString:@"+*-/"];
+        NSCharacterSet *signtarget = [NSCharacterSet characterSetWithCharactersInString:[form substringWithRange:NSMakeRange(1, 1)]];
         
-        case 2:
-            ans = n1 - n2;
-            self.answer.text = [NSString stringWithFormat:@"%ld",ans];
-            break;
+        if([numbers isSupersetOfSet:numtarget1] == NO || [numbers isSupersetOfSet:numtarget2] == NO || [sign isSupersetOfSet:signtarget] == NO){
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"警告"
+                                                                                     message:@"計算式が正しくありません。"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction *action){return;}]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }else{
+            NSInteger n1 = [[form substringToIndex:1] intValue];
+            NSInteger n2 = [[form substringFromIndex:2] intValue];
             
-        case 3:
-            ans = n1 * n2;
-            self.answer.text = [NSString stringWithFormat:@"%ld",ans];
-            break;
+            //  formArrayに同じ計算式がなければ値を追加
+            if (![formArray containsObject:_formula.text]) {
+                [formArray addObject:form];
+            }
+                
+            //  TableView再読み込み
+            [history reloadData];
             
-        case 4:
-            ans = n1 / n2;
-            self.answer.text = [NSString stringWithFormat:@"%ld",ans];
-            break;
+            NSString *sign = [form substringWithRange:NSMakeRange(1, 1)];
+            if([sign isEqualToString:@"+"]){
+                flug = 1;
+            }else if ([sign isEqualToString:@"-"]){
+                flug = 2;
+            }else if ([sign isEqualToString:@"*"]){
+                flug = 3;
+            }else if ([sign isEqualToString:@"/"]){
+                flug = 4;
+            }
             
-        default:
-            break;
+            //  四則計算分岐のswitch文
+            switch (flug) {
+                case 1:
+                    ans = n1 + n2;
+                    self.answer.text = [NSString stringWithFormat:@"%ld" ,ans];
+                    break;
+                    
+                case 2:
+                    ans = n1 - n2;
+                    self.answer.text = [NSString stringWithFormat:@"%ld",ans];
+                    break;
+                    
+                case 3:
+                    ans = n1 * n2;
+                    self.answer.text = [NSString stringWithFormat:@"%ld",ans];
+                    break;
+                    
+                case 4:
+                    ans = n1 / n2;
+                    self.answer.text = [NSString stringWithFormat:@"%ld",ans];
+                    break;
+                    
+                default:
+                    break;
+            }
+            self.formula.text = @"";
+        }
     }
-    
-    self.formula.text = @"";
-// アニメーションを使ってセクションを更新する。
-//    [self.history reloadSections:[[NSMutableIndexSet alloc] init] withRowAnimation:UITableViewRowAnimationLeft];
-    
-//    _answer.text = n1 + n2
-    
-    
-    
-//    _answer.text =
-    
-//    _history.dataSource = 
 }
 
 /* TableViewのセクション数を返すメソッド */
@@ -199,32 +209,18 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return formArray.count;
-    //    return [formArray count];
 }
 
 /* TableViewのセルの値を設定するメソッド */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    static NSString *CellIdentifier = @"Cell";
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell = [history dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-//    if ([tableView isEqual:history]) {
-//        NSLog(@"true");
-//    } else {
-//        NSLog(@"false");
-//    }
-    
-    cell.textLabel.text = [formArray objectAtIndex:indexPath.row];
-    
-//    UITableViewCell *cell = [history dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil){
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
+        cell.textLabel.text = [formArray objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -232,32 +228,28 @@
 /* TableViewのセルタップ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    cellがタップされた際の処理
     UITableViewCell *cell = [history cellForRowAtIndexPath:indexPath];
+    
+//  セルの色を変える
+    cell.contentView.backgroundColor = [UIColor yellowColor];
 
     if([self.formula.text isEqualToString: @""]){
             self.formula.text = cell.textLabel.text;
     }else{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"確認" message:@"計算式を上書きしてよろしいですか？" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"確認"
+                                                                                 message:@"計算式を上書きしてよろしいですか？"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
         
-        [alertController addAction:[UIAlertAction actionWithTitle:@"はい" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){self.formula.text = cell.textLabel.text;}]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"はい"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action){self.formula.text = cell.textLabel.text;}]];
         
-        [alertController addAction:[UIAlertAction actionWithTitle:@"いいえ" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){return;}]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"いいえ"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action){return;}]];
             
             [self presentViewController:alertController animated:YES completion:nil];
         }
-        
     }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

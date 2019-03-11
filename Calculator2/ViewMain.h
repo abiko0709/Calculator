@@ -40,4 +40,5 @@
 
 @property (nonatomic) long flug;
 @property (nonatomic) long ans;
+
 @end
