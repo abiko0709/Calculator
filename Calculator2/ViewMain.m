@@ -10,9 +10,7 @@
 
 #import "AppDelegate.h"
 
-@interface ViewMain (){
-    
-}
+@interface ViewMain ()
 @end
 
 @implementation ViewMain
@@ -22,7 +20,8 @@
 @synthesize history;
 
 /* 初期表示 */
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     _formula.text = @"";
     _answer.text = @"";
@@ -32,93 +31,111 @@
 }
 
 /* 1ボタンタップ */
-- (IBAction)touch_1:(id)sender {
+- (IBAction)touch_1:(id)sender
+{
     _formula.text = [_formula.text stringByAppendingString: @"1"];
 }
 
 /* 2ボタンタップ */
-- (IBAction)touch_2:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"2"];
+- (IBAction)touch_2:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"2"];
 }
 
 /* 3ボタンタップ */
-- (IBAction)touch_3:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"3"];
+- (IBAction)touch_3:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"3"];
 }
 
 /* 4ボタンタップ */
-- (IBAction)touch_4:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"4"];
+- (IBAction)touch_4:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"4"];
 }
 
 /* 5ボタンタップ */
-- (IBAction)touch_5:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"5"];
+- (IBAction)touch_5:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"5"];
 }
 
 /* 6ボタンタップ */
-- (IBAction)touch_6:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"6"];
+- (IBAction)touch_6:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"6"];
 }
 
 /* 7ボタンタップ */
-- (IBAction)touch_7:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"7"];
+- (IBAction)touch_7:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"7"];
 }
 
 /* 8ボタンタップ */
-- (IBAction)touch_8:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"8"];
+- (IBAction)touch_8:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"8"];
 }
 
 /* 9ボタンタップ */
-- (IBAction)touch_9:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"9"];
+- (IBAction)touch_9:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"9"];
 }
 
 /* 0ボタンタップ */
-- (IBAction)touch_0:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"0"];
+- (IBAction)touch_0:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"0"];
 }
 
 /* .ボタンタップ */
-- (IBAction)touch_period:(id)sender {
+- (IBAction)touch_period:(id)sender
+{
     _formula.text = [_formula.text stringByAppendingString: @"."];
 }
 
 /* +ボタンタップ */
-- (IBAction)touch_plus:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"+"];
+- (IBAction)touch_plus:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"+"];
 }
 
 /* -ボタンタップ */
-- (IBAction)touch_minus:(id)sender {
-        _formula.text = [_formula.text stringByAppendingString: @"-"];
+- (IBAction)touch_minus:(id)sender
+{
+    _formula.text = [_formula.text stringByAppendingString: @"-"];
 }
 
 /* *ボタンタップ */
-- (IBAction)touch_asterisk:(id)sender {
+- (IBAction)touch_asterisk:(id)sender
+{
     _formula.text = [_formula.text stringByAppendingString:@"*"];
 }
 
 /* /ボタンタップ */
-- (IBAction)touch_srash:(id)sender {
+- (IBAction)touch_srash:(id)sender
+{
     _formula.text = [_formula.text stringByAppendingString: @"/"];
 }
 
 /* √ボタンタップ */
-- (IBAction)touch_root:(id)sender {
+- (IBAction)touch_root:(id)sender
+{
     _formula.text = [_formula.text stringByAppendingString: @"√"];
 }
 
 /* Cボタンタップ */
-- (IBAction)touch_clear:(id)sender {
+- (IBAction)touch_clear:(id)sender
+{
     _formula.text = @"";
     _answer.text = @"";
 }
 
 /* =ボタンタップ */
-- (IBAction)touch_equal:(id)sender {
+- (IBAction)touch_equal:(id)sender
+{
     NSString *form = _formula.text;
 
 //  TextFieldに計算式を入力していない場合／⚪︎+⚪︎形式でない場合はメッセージを表示する
@@ -248,8 +265,8 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action){return;}]];
             
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
+        [self presentViewController:alertController animated:YES completion:nil];
     }
+}
 
 @end
