@@ -14,17 +14,34 @@
 @end
 
 @implementation ViewMain
-@synthesize flug;
-@synthesize ans;
-@synthesize formArray;
 @synthesize history;
+@synthesize formula;
+@synthesize answer;
+@synthesize Button_0;
+@synthesize Button_1;
+@synthesize Button_2;
+@synthesize Button_3;
+@synthesize Button_4;
+@synthesize Button_5;
+@synthesize Button_6;
+@synthesize Button_7;
+@synthesize Button_8;
+@synthesize Button_9;
+@synthesize Button_plus;
+@synthesize Button_minus;
+@synthesize Button_asterisk;
+@synthesize Button_srash;
+@synthesize Button_period;
+@synthesize Button_clear;
+@synthesize Button_equal;
+@synthesize Button_root;
 
 /* 初期表示 */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _formula.text = @"";
-    _answer.text = @"";
+    self.formula.text = @"";
+    self.answer.text = @"";
     flug = 0;
     formArray = [NSMutableArray array];
     self.title = @"計算機";
@@ -33,113 +50,113 @@
 /* 1ボタンタップ */
 - (IBAction)touch_1:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"1"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"1"];
 }
 
 /* 2ボタンタップ */
 - (IBAction)touch_2:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"2"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"2"];
 }
 
 /* 3ボタンタップ */
 - (IBAction)touch_3:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"3"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"3"];
 }
 
 /* 4ボタンタップ */
 - (IBAction)touch_4:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"4"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"4"];
 }
 
 /* 5ボタンタップ */
 - (IBAction)touch_5:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"5"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"5"];
 }
 
 /* 6ボタンタップ */
 - (IBAction)touch_6:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"6"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"6"];
 }
 
 /* 7ボタンタップ */
 - (IBAction)touch_7:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"7"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"7"];
 }
 
 /* 8ボタンタップ */
 - (IBAction)touch_8:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"8"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"8"];
 }
 
 /* 9ボタンタップ */
 - (IBAction)touch_9:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"9"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"9"];
 }
 
 /* 0ボタンタップ */
 - (IBAction)touch_0:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"0"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"0"];
 }
 
 /* .ボタンタップ */
 - (IBAction)touch_period:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"."];
+    self.formula.text = [self.formula.text stringByAppendingString: @"."];
 }
 
 /* +ボタンタップ */
 - (IBAction)touch_plus:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"+"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"+"];
 }
 
 /* -ボタンタップ */
 - (IBAction)touch_minus:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"-"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"-"];
 }
 
 /* *ボタンタップ */
 - (IBAction)touch_asterisk:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString:@"*"];
+    self.formula.text = [self.formula.text stringByAppendingString:@"*"];
 }
 
 /* /ボタンタップ */
 - (IBAction)touch_srash:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"/"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"/"];
 }
 
 /* √ボタンタップ */
 - (IBAction)touch_root:(id)sender
 {
-    _formula.text = [_formula.text stringByAppendingString: @"√"];
+    self.formula.text = [self.formula.text stringByAppendingString: @"√"];
 }
 
 /* Cボタンタップ */
 - (IBAction)touch_clear:(id)sender
 {
-    _formula.text = @"";
-    _answer.text = @"";
+    self.formula.text = @"";
+    self.answer.text = @"";
 }
 
 /* =ボタンタップ */
 - (IBAction)touch_equal:(id)sender
 {
-    NSString *form = _formula.text;
+    NSString *form = self.formula.text;
 
 //  TextFieldに計算式を入力していない場合／⚪︎+⚪︎形式でない場合はメッセージを表示する
-    if([form isEqualToString:@""]){
+    if ([form isEqualToString:@""]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"警告"
                                                                                  message:@"計算式を入力してください。"
                                                                           preferredStyle:UIAlertControllerStyleAlert];
@@ -147,7 +164,7 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action){return;}]];
         [self presentViewController:alertController animated:YES completion:nil];
-    }else{
+    } else {
 //      TextFieldに入力された計算式が正しいか入力チェックを行う
         NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
         NSCharacterSet *numtarget1 = [NSCharacterSet characterSetWithCharactersInString:[form substringToIndex:1]];
@@ -155,7 +172,7 @@
         NSCharacterSet *sign = [NSCharacterSet characterSetWithCharactersInString:@"+*-/"];
         NSCharacterSet *signtarget = [NSCharacterSet characterSetWithCharactersInString:[form substringWithRange:NSMakeRange(1, 1)]];
         
-        if([numbers isSupersetOfSet:numtarget1] == NO || [numbers isSupersetOfSet:numtarget2] == NO || [sign isSupersetOfSet:signtarget] == NO){
+        if ([numbers isSupersetOfSet:numtarget1] == NO || [numbers isSupersetOfSet:numtarget2] == NO || [sign isSupersetOfSet:signtarget] == NO) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"警告"
                                                                                      message:@"計算式が正しくありません。"
                                                                               preferredStyle:UIAlertControllerStyleAlert];
@@ -163,12 +180,12 @@
                                                                 style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction *action){return;}]];
             [self presentViewController:alertController animated:YES completion:nil];
-        }else{
+        } else {
             NSInteger n1 = [[form substringToIndex:1] intValue];
             NSInteger n2 = [[form substringFromIndex:2] intValue];
             
             //  formArrayに同じ計算式がなければ値を追加
-            if (![formArray containsObject:_formula.text]) {
+            if (![formArray containsObject:self.formula.text]) {
                 [formArray addObject:form];
             }
                 
@@ -176,13 +193,13 @@
             [history reloadData];
             
             NSString *sign = [form substringWithRange:NSMakeRange(1, 1)];
-            if([sign isEqualToString:@"+"]){
+            if ([sign isEqualToString:@"+"]) {
                 flug = 1;
-            }else if ([sign isEqualToString:@"-"]){
+            } else if ([sign isEqualToString:@"-"]) {
                 flug = 2;
-            }else if ([sign isEqualToString:@"*"]){
+            } else if ([sign isEqualToString:@"*"]) {
                 flug = 3;
-            }else if ([sign isEqualToString:@"/"]){
+            } else if ([sign isEqualToString:@"/"]) {
                 flug = 4;
             }
             
@@ -231,13 +248,13 @@
 /* TableViewのセルの値を設定するメソッド */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [history dequeueReusableCellWithIdentifier:@"cell"];
+    UITableViewCell *cell = [self.history dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-        cell.textLabel.text = [formArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [formArray objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -245,14 +262,14 @@
 /* TableViewのセルタップ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [history cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [self.history cellForRowAtIndexPath:indexPath];
     
 //  セルの色を変える
     cell.contentView.backgroundColor = [UIColor yellowColor];
 
-    if([self.formula.text isEqualToString: @""]){
-            self.formula.text = cell.textLabel.text;
-    }else{
+    if ([self.formula.text isEqualToString: @""]) {
+        self.formula.text = cell.textLabel.text;
+    } else {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"確認"
                                                                                  message:@"計算式を上書きしてよろしいですか？"
                                                                           preferredStyle:UIAlertControllerStyleAlert];

@@ -11,6 +11,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewMain">
             <connections>
+                <outlet property="Button_0" destination="6da-5C-mAt" id="boI-SX-YO5"/>
+                <outlet property="Button_1" destination="ZDM-x5-Yww" id="uFP-f8-T6t"/>
+                <outlet property="Button_2" destination="ltj-4Y-qgx" id="M7I-Sa-fWR"/>
+                <outlet property="Button_3" destination="bH1-9A-48i" id="CR1-Ui-faH"/>
+                <outlet property="Button_4" destination="L8i-Z0-TNj" id="D6U-gh-TOU"/>
+                <outlet property="Button_5" destination="xzE-5p-fYU" id="BIZ-h3-8Y4"/>
+                <outlet property="Button_6" destination="aLk-FW-key" id="p7v-wv-X8x"/>
+                <outlet property="Button_7" destination="ZIw-fo-XJP" id="SuN-ED-GQc"/>
+                <outlet property="Button_8" destination="I7h-xr-lXf" id="dtw-gx-a9G"/>
+                <outlet property="Button_9" destination="jqd-7S-G41" id="EEl-T8-IRW"/>
+                <outlet property="Button_asterisk" destination="nxo-K5-jMG" id="EnI-rf-eyd"/>
+                <outlet property="Button_clear" destination="SBh-qb-bIX" id="4yv-h5-OuZ"/>
+                <outlet property="Button_equal" destination="pkm-uF-wkS" id="hPz-2A-pRt"/>
+                <outlet property="Button_minus" destination="zXh-je-zOZ" id="LAH-GZ-dl2"/>
+                <outlet property="Button_period" destination="qVn-Ai-et6" id="6gD-v0-jU3"/>
+                <outlet property="Button_plus" destination="RSM-U9-QAx" id="TO2-aK-oWx"/>
+                <outlet property="Button_root" destination="e7L-Up-k5w" id="N5j-RO-17N"/>
+                <outlet property="Button_srash" destination="dyJ-UD-jxk" id="KNi-lU-RsK"/>
                 <outlet property="answer" destination="ILI-qi-wbs" id="hDf-LC-xIE"/>
                 <outlet property="formula" destination="SP3-HF-RQl" id="xpY-gQ-Vxj"/>
                 <outlet property="history" destination="68y-MT-DMT" id="cBh-lH-RHg"/>
@@ -231,7 +249,7 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <point key="canvasLocation" x="26.5625" y="38.671875"/>
+            <point key="canvasLocation" x="-808" y="-247"/>
         </view>
     </objects>
 </document>

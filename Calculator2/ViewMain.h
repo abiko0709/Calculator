@@ -12,12 +12,49 @@
 {
     NSMutableArray *formArray;
     UITableView *history;
+    UIButton *Button_0;
+    UIButton *Button_1;
+    UIButton *Button_2;
+    UIButton *Button_3;
+    UIButton *Button_4;
+    UIButton *Button_5;
+    UIButton *Button_6;
+    UIButton *Button_7;
+    UIButton *Button_8;
+    UIButton *Button_9;
+    UIButton *Button_plus;
+    UIButton *Button_minus;
+    UIButton *Button_asterisk;
+    UIButton *Button_srash;
+    UIButton *Button_period;
+    UIButton *Button_clear;
+    UIButton *Button_root;
+    UIButton *Button_equal;
+    long flug;
+    long ans;
 }
 
 @property (nonatomic) IBOutlet UITextField *answer;
 @property (nonatomic) IBOutlet UITextField *formula;
-@property (nonatomic) IBOutlet NSMutableArray *formArray;
 @property (nonatomic) IBOutlet UITableView *history;
+@property (nonatomic) IBOutlet UIButton *Button_0;
+@property (nonatomic) IBOutlet UIButton *Button_1;
+@property (nonatomic) IBOutlet UIButton *Button_2;
+@property (nonatomic) IBOutlet UIButton *Button_3;
+@property (nonatomic) IBOutlet UIButton *Button_4;
+@property (nonatomic) IBOutlet UIButton *Button_5;
+@property (nonatomic) IBOutlet UIButton *Button_6;
+@property (nonatomic) IBOutlet UIButton *Button_7;
+@property (nonatomic) IBOutlet UIButton *Button_8;
+@property (nonatomic) IBOutlet UIButton *Button_9;
+@property (nonatomic) IBOutlet UIButton *Button_plus;
+@property (nonatomic) IBOutlet UIButton *Button_minus;
+@property (nonatomic) IBOutlet UIButton *Button_asterisk;
+@property (nonatomic) IBOutlet UIButton *Button_srash;
+@property (nonatomic) IBOutlet UIButton *Button_period;
+@property (nonatomic) IBOutlet UIButton *Button_clear;
+@property (nonatomic) IBOutlet UIButton *Button_root;
+@property (nonatomic) IBOutlet UIButton *Button_equal;
 
 - (IBAction)touch_1:(id)sender;
 - (IBAction)touch_2:(id)sender;
@@ -37,8 +74,5 @@
 - (IBAction)touch_clear:(id)sender;
 - (IBAction)touch_root:(id)sender;
 - (IBAction)touch_equal:(id)sender;
-
-@property (nonatomic) long flug;
-@property (nonatomic) long ans;
 
 @end
